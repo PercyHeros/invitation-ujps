@@ -938,13 +938,13 @@
       }, 4000);
     }
 
- // Gestion de la soumission du formulaire d'inscription
+// Gestion de la soumission du formulaire d'inscription
 document.getElementById('member-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const nom = document.getElementById('nom').value.trim();
   const prenom = document.getElementById('prenom').value.trim();
-  const telephone = document.getElementById('telephone').value.trim();
+  const phone = document.getElementById('telephone').value.trim(); // Récupère la valeur de l'input HTML
 
   const { data, error } = await supabaseClient
     .from('invitations')
@@ -952,9 +952,9 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
       { 
         nom: nom, 
         prenom: prenom, 
-        phone_contact: telephone,     // Nom exact de la colonne dans Supabase
-        event_date: '2026-12-25',      // Obligatoire si NOT NULL
-        location: 'Safari Beach'      // Obligatoire si NOT NULL
+        phone_contact: phone,    // Unique colonne de téléphone dans Supabase
+        event_date: '2026-12-25',
+        location: 'Safari Beach'
       }
     ]);
 
