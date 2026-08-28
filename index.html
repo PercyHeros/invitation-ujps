@@ -938,7 +938,7 @@
       }, 4000);
     }
 
-   // Gestion de la soumission du formulaire d'inscription
+  // Gestion de la soumission du formulaire d'inscription
 document.getElementById('member-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -953,7 +953,8 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
         nom: nom, 
         prenom: prenom, 
         telephone: telephone,
-        event_date: '2026-12-25' // Satisfait la contrainte NOT NULL de votre table
+        event_date: '2026-12-25',
+        location: 'Safari Beach' // Satisfait la contrainte NOT NULL de location
       }
     ]);
 
@@ -965,7 +966,6 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
     toggleRegisterModal(false);
   }
 });
-
     // Ouverture de l'enveloppe
     function openEnvelope() {
       var envelopeScreen = document.getElementById("envelope-screen");
