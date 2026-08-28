@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE htm
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -946,7 +946,7 @@
       }, 4000);
     }
 
-    // Gestion de la soumission du formulaire d'inscription
+// Gestion de la soumission du formulaire d'inscription
     document.getElementById('member-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -954,11 +954,14 @@
       const firstName = document.getElementById('first_name').value.trim();
       const phone = document.getElementById('phone_number').value.trim();
 
-      // Insertion directe des 3 champs séparés dans Supabase
+      // Fusion du nom et prénom pour remplir la colonne obligatoirement NOT NULL "guest_name"
+      const fullName = `${lastName} ${firstName}`;
+
       const { data, error } = await supabaseClient
         .from('invitations')
         .insert([
           { 
+            guest_name: fullName,
             nom: lastName, 
             prenom: firstName, 
             telephone: phone 
