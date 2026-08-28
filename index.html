@@ -945,35 +945,32 @@
         toast.classList.remove('show');
       }, 4000);
     }
-// Gestion de la soumission du formulaire d'inscription
-document.getElementById('member-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
 
-    const lastName = document.getElementById('last_name').value.trim();
-    const firstName = document.getElementById('first_name').value.trim();
-    const phone = document.getElementById('phone_number').value.trim();
+    // Gestion de la soumission du formulaire d'inscription
+    document.getElementById('member-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    // Insertion directe des 3 champs séparés dans Supabase
-    const { data, error } = await supabaseClient
-      .from('invitations')
-      .insert([
-        { 
-          nom: lastName, 
-          prenom: firstName, 
-          telephone: phone 
-        }
-      ]);
+      const lastName = document.getElementById('last_name').value.trim();
+      const firstName = document.getElementById('first_name').value.trim();
+      const phone = document.getElementById('phone_number').value.trim();
 
-    if (error) {
+      // Insertion directe des 3 champs séparés dans Supabase
+      const { data, error } = await supabaseClient
+        .from('invitations')
+        .insert([
+          { 
+            nom: lastName, 
+            prenom: firstName, 
+            telephone: phone 
+          }
+        ]);
+
+      if (error) {
         showFloatingToast("Erreur lors de l'enregistrement : " + error.message);
-    } else {
-        showFloatingToast("Inscription réussie ! Bienvenue à l'événement.");
+      } else {
+        showFloatingToast("✨ Inscription réussie ! Merci d'avoir rejoint l'UJPS.");
         document.getElementById('member-form').reset();
-    }
-});
-        
-        // Afficher le message flottant
-        showFloatingToast("✨ Merci d'avoir choisi Ujps nous te remercions !");
+        toggleRegisterModal(false);
       }
     });
 
