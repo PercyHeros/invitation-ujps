@@ -945,34 +945,32 @@
         toast.classList.remove('show');
       }, 4000);
     }
+// Gestion de la soumission du formulaire d'inscription
+document.getElementById('member-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    // Gestion de la soumission du formulaire d'inscription
-    document.getElementById('member-form').addEventListener('submit', async (e) => {
-      e.preventDefault();
+    const lastName = document.getElementById('last_name').value.trim();
+    const firstName = document.getElementById('first_name').value.trim();
+    const phone = document.getElementById('phone_number').value.trim();
 
-      const lastName = document.getElementById('last_name').value.trim();
-      const firstName = document.getElementById('first_name').value.trim();
-      const phone = document.getElementById('phone_number').value.trim();
+    // Insertion directe des 3 champs séparés dans Supabase
+    const { data, error } = await supabaseClient
+      .from('invitations')
+      .insert([
+        { 
+          nom: lastName, 
+          prenom: firstName, 
+          telephone: phone 
+        }
+      ]);
 
-      // Fusion du Nom et du Prénom pour la colonne 'nom_membre'
-      const fullName = `${lastName} ${firstName}`;
-
-      // Insertion dans la table 'members'
-      const { data, error } = await supabaseClient
-        .from('members') 
-        .insert([
-          { 
-            nom_membre: fullName, 
-            phone_number: phone 
-          }
-        ]);
-
-      if (error) {
-        alert("Erreur lors de l'enregistrement : " + error.message);
-      } else {
-        // Fermer la modale et réinitialiser le formulaire
-        toggleRegisterModal(false);
+    if (error) {
+        showFloatingToast("Erreur lors de l'enregistrement : " + error.message);
+    } else {
+        showFloatingToast("Inscription réussie ! Bienvenue à l'événement.");
         document.getElementById('member-form').reset();
+    }
+});
         
         // Afficher le message flottant
         showFloatingToast("✨ Merci d'avoir choisi Ujps nous te remercions !");
