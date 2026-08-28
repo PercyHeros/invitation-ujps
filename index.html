@@ -938,7 +938,7 @@
       }, 4000);
     }
 
-  // Gestion de la soumission du formulaire d'inscription
+ // Gestion de la soumission du formulaire d'inscription
 document.getElementById('member-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -952,11 +952,9 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
       { 
         nom: nom, 
         prenom: prenom, 
-        telephone: telephone,
-        title: '2ème Anniversaire UJPS',
-        event_date: '2026-12-25',
-        location: 'Safari Beach (Nsele)',
-        description: 'Invitation officielle'
+        phone_contact: telephone,     // Nom exact de la colonne dans Supabase
+        event_date: '2026-12-25',      // Obligatoire si NOT NULL
+        location: 'Safari Beach'      // Obligatoire si NOT NULL
       }
     ]);
 
