@@ -944,7 +944,7 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
 
   const nom = document.getElementById('nom').value.trim();
   const prenom = document.getElementById('prenom').value.trim();
-  const phone = document.getElementById('telephone').value.trim(); // Récupère la valeur de l'input HTML
+  const phone = document.getElementById('telephone').value.trim();
 
   const { data, error } = await supabaseClient
     .from('invitations')
@@ -952,9 +952,12 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
       { 
         nom: nom, 
         prenom: prenom, 
-        phone_contact: phone,    // Unique colonne de téléphone dans Supabase
+        phone_contact: phone,
+        // Valeurs par défaut qui débloquent toutes les contraintes NOT NULL
+        title: '2ème Anniversaire UJPS',
         event_date: '2026-12-25',
-        location: 'Safari Beach'
+        location: 'Safari Beach',
+        description: 'Inscription membre'
       }
     ]);
 
