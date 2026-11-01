@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3ème Anniversaire de l’UJPS - Invitation</title>
+  <title>2ème Anniversaire de l’UJPS - Invitation</title>
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -12,8 +12,8 @@
       --gold: #ffd700;
       --gold-dark: #c59b27;
       --gold-glow: rgba(255, 215, 0, 0.4);
-      --bg-overlay: rgba(10, 10, 12, 0.82);
-      --card-bg: rgba(255, 255, 255, 0.05);
+      --bg-overlay: rgba(10, 10, 12, 0.55); /* Arrière-plan plus lumineux */
+      --card-bg: rgba(255, 255, 255, 0.08);
       --card-border: rgba(255, 215, 0, 0.35);
     }
 
@@ -31,7 +31,7 @@
     }
 
     /* ----------------------------------
-       1. ÉCRAN ENVELOPPE
+        1. ÉCRAN ENVELOPPE
     ---------------------------------- */
     #envelope-screen {
       position: fixed;
@@ -114,7 +114,7 @@
     }
 
     /* ----------------------------------
-       2. PAGE D'INVITATION
+        2. PAGE D'INVITATION
     ---------------------------------- */
     .bg-fixed {
       position: fixed;
@@ -365,7 +365,7 @@
     }
 
     /* ----------------------------------
-       3. INTERFACE MODALES
+        3. INTERFACE MODALES
     ---------------------------------- */
     #about-modal, #gallery-modal, #activities-modal, #register-modal {
       position: fixed;
@@ -666,7 +666,7 @@
     }
 
     /* ----------------------------------
-       4. LIGHTBOX
+        4. LIGHTBOX
     ---------------------------------- */
     #lightbox {
       position: fixed;
@@ -714,7 +714,7 @@
     <div class="envelope-bg"></div>
     <div class="envelope-card">
       <div class="envelope-icon">✉️</div>
-      <div class="envelope-title">Bonjour cher(e) Invité(e)</div>
+      <div class="envelope-title">Bonjour cher(e) invité(e)</div>
     </div>
     <button class="btn-open" onclick="openEnvelope()">✉️ Ouvrir l'invitation</button>
   </div>
@@ -729,13 +729,13 @@
       <h1>2ème Anniversaire de l’UJPS</h1>
 
       <div class="invitation-card">
-        <p class="hosts">Hôte d'honneur : <strong>Percy</strong></p>
+        <p class="hosts">Hôte d'honneur : <strong>UJPS</strong></p>
         
         <p class="guest-title">Invité(e) de marque :</p>
-        <div class="guest-name">Merdie makobo</div>
+        <div class="guest-name" id="guest-name-display">POS SHOP SELEMBAO</div>
 
         <p style="font-size: 0.95rem; margin-top: 10px; color: #eee; line-height: 1.5;">
-          Nous avons le plaisir de vous inviter à célébrer avec nous cet événement mémorable.
+          Nous avons l'honneur de vous convier à célébrer avec nous cet événement mémorable.
         </p>
       </div>
 
@@ -765,14 +765,14 @@
 
       <div class="section-title">📍 Lieu & Rendez-vous</div>
       <div class="location-box">
-        <p>📅 <strong>Date :</strong> 25 Décembre 2026 à 15h00</p>
+        <p>📅 <strong>Date :</strong> 25 Décembre 2026</p>
         <p>🕒 <strong>Heure :</strong> 08:30</p>
         <p>📍 <strong>Lieu de destination :</strong> Safari Beach (N’sele)</p>
         <p>🚌 <strong>Lieu d'embarquement :</strong> Centre Winner Selembao</p>
         <p>📞 <strong>Contact :</strong> 0851575888</p>
       </div>
 
-      <a href="https://wa.me/243851575888?text=Bonjour%20Percy,%20moi%20Center%20Pascal,%20je%20confirme%20ma%20pr%C3%A9sence%20au%202%C3%A8me%20Anniversaire%20de%20l%27UJPS%20!" target="_blank" class="btn-custom btn-whatsapp">
+      <a href="https://wa.me/243851575888?text=Bonjour%20Percy,%20je%20confirme%20ma%20pr%C3%A9sence%20au%202%C3%A8me%20Anniversaire%20de%20l%27UJPS%20!" target="_blank" class="btn-custom btn-whatsapp">
         💌 Confirmer ma présence sur WhatsApp
       </a>
 
@@ -817,7 +817,7 @@
     </div>
     
     <div class="modal-body">
-      <div class="media-category-title">📋 Programme des activités du 25/12/2026</div>
+      <div class="media-category-title">📋 Programme d'activités du 25/12/2026</div>
       
       <button class="activity-btn">
         <div class="activity-btn-title">
@@ -928,6 +928,20 @@
 
     const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    // Lecture dynamique du nom et prénom depuis l'URL
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const nom = urlParams.get('nom');
+      const prenom = urlParams.get('prenom');
+
+      if (nom && prenom) {
+        const guestDisplay = document.getElementById('guest-name-display');
+        if (guestDisplay) {
+          guestDisplay.textContent = `${prenom} ${nom}`;
+        }
+      }
+    });
+
     // Fonction d'affichage du message flottant (Toast)
     function showFloatingToast(message) {
       const toast = document.getElementById('floating-toast');
@@ -938,38 +952,38 @@
       }, 4000);
     }
 
-// Gestion de la soumission du formulaire d'inscription
-document.getElementById('member-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
+    // Gestion de la soumission du formulaire d'inscription
+    document.getElementById('member-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-  const nom = document.getElementById('nom').value.trim();
-  const prenom = document.getElementById('prenom').value.trim();
-  const phone = document.getElementById('telephone').value.trim();
+      const nom = document.getElementById('nom').value.trim();
+      const prenom = document.getElementById('prenom').value.trim();
+      const phone = document.getElementById('telephone').value.trim();
 
-  const { data, error } = await supabaseClient
-    .from('invitations')
-    .insert([
-      { 
-        nom: nom, 
-        prenom: prenom, 
-        phone_contact: phone,
-        // Valeurs par défaut qui débloquent toutes les contraintes NOT NULL
-        title: '2ème Anniversaire UJPS',
-        event_date: '2026-12-25',
-        location: 'Safari Beach',
-        description: 'Inscription membre'
+      const { data, error } = await supabaseClient
+        .from('invitations')
+        .insert([
+          { 
+            nom: nom, 
+            prenom: prenom, 
+            phone_contact: phone,
+            title: '2ème Anniversaire UJPS',
+            event_date: '2026-12-25',
+            location: 'Safari Beach',
+            description: 'Inscription membre'
+          }
+        ]);
+
+      if (error) {
+        showFloatingToast("Erreur lors de l'enregistrement : " + error.message);
+      } else {
+        showFloatingToast("✨ Inscription réussie ! Merci d'avoir rejoint l'UJPS.");
+        document.getElementById('member-form').reset();
+        toggleRegisterModal(false);
       }
-    ]);
+    });
 
-  if (error) {
-    showFloatingToast("Erreur lors de l'enregistrement : " + error.message);
-  } else {
-    showFloatingToast("✨ Inscription réussie ! Merci d'avoir rejoint l'UJPS.");
-    document.getElementById('member-form').reset();
-    toggleRegisterModal(false);
-  }
-});
-    // Ouverture de l'enveloppe
+    // Ouverture de l'enveloppe et gestion de la musique (Volume doux + Arrêt si l'invité quitte)
     function openEnvelope() {
       var envelopeScreen = document.getElementById("envelope-screen");
       var mainContent = document.getElementById("main-content");
@@ -982,8 +996,24 @@ document.getElementById('member-form').addEventListener('submit', async (e) => {
 
       mainContent.classList.add("visible");
 
+      // Réglage du volume à 20% (doux)
+      audio.volume = 0.2;
+
       audio.play().catch(function(error) {
         console.log("Erreur de lecture audio : ", error);
+      });
+
+      // Arrêter la musique si l'invité change d'onglet ou minimise la page
+      document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+          audio.pause();
+        }
+      });
+
+      // Arrêter la musique si l'invité ferme ou quitte la page
+      window.addEventListener('beforeunload', function() {
+        audio.pause();
+        audio.currentTime = 0;
       });
     }
 
