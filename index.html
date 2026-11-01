@@ -12,7 +12,7 @@
       --gold: #ffd700;
       --gold-dark: #c59b27;
       --gold-glow: rgba(255, 215, 0, 0.4);
-      --bg-overlay: rgba(10, 10, 12, 0.55); /* Arrière-plan plus lumineux */
+      --bg-overlay: rgba(10, 10, 12, 0.65); /* Voile assombri réduit pour plus de luminosité */
       --card-bg: rgba(255, 255, 255, 0.08);
       --card-border: rgba(255, 215, 0, 0.35);
     }
@@ -362,6 +362,22 @@
       transform: translateY(-3px);
       box-shadow: 0 10px 25px rgba(37, 211, 102, 0.6);
       background: linear-gradient(135deg, #26e66f, #149c8d);
+    }
+
+    /* Style du pied de page / Signature */
+    .footer-signature {
+      margin-top: 35px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 215, 0, 0.2);
+      font-size: 0.85rem;
+      color: #aaa;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+
+    .footer-signature span {
+      color: var(--gold);
+      font-weight: 600;
     }
 
     /* ----------------------------------
@@ -775,6 +791,11 @@
       <a href="https://wa.me/243851575888?text=Bonjour%20Percy,%20je%20confirme%20ma%20pr%C3%A9sence%20au%202%C3%A8me%20Anniversaire%20de%20l%27UJPS%20!" target="_blank" class="btn-custom btn-whatsapp">
         💌 Confirmer ma présence sur WhatsApp
       </a>
+
+      <!-- Signature ajoutée en bas -->
+      <div class="footer-signature">
+        Projet Réalisé par <span>Percy Sosa</span> (ID:213857)
+      </div>
 
     </div>
   </div>
