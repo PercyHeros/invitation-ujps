@@ -794,7 +794,7 @@
 
       <!-- Signature ajoutée en bas -->
       <div class="footer-signature">
-        Réalisé par <span>Percy Sosa</span> (ID:213857)
+        Projet Réalisé par <span>Percy Sosa</span> (ID:213857)
       </div>
 
     </div>
@@ -973,7 +973,7 @@
       }, 4000);
     }
 
-    // Gestion de la soumission du formulaire d'inscription
+    // Gestion de la soumission du formulaire d'inscription (AVEC VÉRIFICATION ANTI-DOUBLON)
     document.getElementById('member-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -981,6 +981,24 @@
       const prenom = document.getElementById('prenom').value.trim();
       const phone = document.getElementById('telephone').value.trim();
 
+      // 1. Vérification si le membre existe déjà
+      const { data: existingUsers, error: checkError } = await supabaseClient
+        .from('invitations')
+        .select('*')
+        .or(`and(nom.eq.${nom},prenom.eq.${prenom}),phone_contact.eq.${phone}`);
+
+      if (checkError) {
+        showFloatingToast("Erreur lors de la vérification : " + checkError.message);
+        return;
+      }
+
+      // 2. Si déjà trouvé, on bloque l'enregistrement
+      if (existingUsers && existingUsers.length > 0) {
+        showFloatingToast("⚠️ Vous êtes déjà enregistré(e) dans la liste !");
+        return;
+      }
+
+      // 3. Sinon, on enregistre
       const { data, error } = await supabaseClient
         .from('invitations')
         .insert([
